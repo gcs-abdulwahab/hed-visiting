@@ -30,17 +30,17 @@ class Dashboard extends Component
     {
         $month = \Carbon\Carbon::parse($this->selectedMonth);
 
-        // Get total lectures and amount for the selected month
-        $this->totalLectures = LectureRecord::whereMonth('date', $month->month)
-            ->whereYear('date', $month->year)
-            ->sum('lectures');
+        // // Get total lectures and amount for the selected month
+        // $this->totalLectures = LectureRecord::whereMonth('date', $month->month)
+        //     ->whereYear('date', $month->year)
+        //     ->sum('lectures');
 
-        $this->totalAmount = MonthlyBilling::where('month', $this->selectedMonth)
-            ->sum('total_amount');
+        // $this->totalAmount = MonthlyBilling::where('month', $this->selectedMonth)
+        //     ->sum('total_amount');
 
-        // Get employee counts
-        $this->activeEmployees = Employee::active()->count();
-        $this->inactiveEmployees = Employee::inactive()->count();
+        // // Get employee counts
+        // $this->activeEmployees = Employee::active()->count();
+        // $this->inactiveEmployees = Employee::inactive()->count();
     }
 
     public function render()

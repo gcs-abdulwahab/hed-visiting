@@ -13,11 +13,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Create users for each role
+        $roles = ['superadmin', 'admin', 'principal', 'teacher'];
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        foreach ($roles as $role) {
+            User::factory()->create([
+                'name' => ucfirst($role) . ' User',
+                'email' => $role . '@example.com',
+                'role' => $role,
+                'password' => bcrypt('password'), // Make sure to change in production
+            ]);
+        }
+
+        // Create some additional regular teachers
+        User::factory(3)->create([
+            'role' => 'teacher'
         ]);
     }
 }

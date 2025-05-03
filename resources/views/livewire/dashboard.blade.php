@@ -12,7 +12,7 @@
             <!-- Total Lectures Card -->
             <div class="bg-white rounded-lg shadow p-6">
                 <h3 class="text-lg font-medium text-gray-900">Total Lectures</h3>
-                <p class="mt-2 text-3xl font-bold text-indigo-600">{{ number_format($totalLectures) }}</p>
+                <p class="mt-2 text-3xl font-bold text-indigo-600">{{ 22 }}</p>
                 <p class="mt-1 text-sm text-gray-500">For {{ \Carbon\Carbon::parse($selectedMonth)->format('F Y') }}</p>
             </div>
 
