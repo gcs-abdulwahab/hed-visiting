@@ -46,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Teacher Routes
-    Route::middleware(['role:teacher'])->group(function () {
+    Route::middleware('role:teacher')->group(function () {
         Route::get('teacher/records', [TeacherController::class, 'records'])->name('teacher.records');
         Route::post('teacher/records', [TeacherController::class, 'storeRecord'])->name('teacher.records.store');
     });

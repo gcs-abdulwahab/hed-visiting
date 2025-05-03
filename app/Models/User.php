@@ -64,6 +64,10 @@ class User extends Authenticatable
 
     public function hasRole($role)
     {
+        if (is_string($role)) {
+            $roles = array_map('trim', explode(',', $role));
+            return in_array($this->role, $roles);
+        }
         return $this->role === $role;
     }
 

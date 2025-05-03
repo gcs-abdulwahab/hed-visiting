@@ -2,9 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Employee;
-use App\Models\MonthlyBilling;
-use App\Models\LectureRecord;
+use App\Services\DashboardService;
 use Livewire\Component;
 
 class Dashboard extends Component
@@ -14,6 +12,13 @@ class Dashboard extends Component
     public $totalAmount = 0;
     public $activeEmployees = 0;
     public $inactiveEmployees = 0;
+
+    protected DashboardService $dashboardService;
+
+    public function boot(DashboardService $dashboardService)
+    {
+        $this->dashboardService = $dashboardService;
+    }
 
     public function mount()
     {
@@ -28,19 +33,12 @@ class Dashboard extends Component
 
     protected function updateStats()
     {
-        $month = \Carbon\Carbon::parse($this->selectedMonth);
+        $stats = $this->dashboardService->getStats($this->selectedMonth);
 
-        // // Get total lectures and amount for the selected month
-        // $this->totalLectures = LectureRecord::whereMonth('date', $month->month)
-        //     ->whereYear('date', $month->year)
-        //     ->sum('lectures');
-
-        // $this->totalAmount = MonthlyBilling::where('month', $this->selectedMonth)
-        //     ->sum('total_amount');
-
-        // // Get employee counts
-        // $this->activeEmployees = Employee::active()->count();
-        // $this->inactiveEmployees = Employee::inactive()->count();
+        $this->totalLectures = $stats['totalLectures'];
+        $this->totalAmount = $stats['totalAmount'];
+        $this->activeEmployees = $stats['activeEmployees'];
+        $this->inactiveEmployees = $stats['inactiveEmployees'];
     }
 
     public function render()
